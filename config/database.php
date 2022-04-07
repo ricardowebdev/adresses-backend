@@ -62,7 +62,11 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
-
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'dsn' => env('MONGO_URI', 'mongodb://ricardo:123456@localhost:27017/'),
+            'database' => env('MONGO_DATABASE', 'address'),
+        ],        
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
