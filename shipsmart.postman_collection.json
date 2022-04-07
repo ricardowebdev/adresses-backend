@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "47955e5b-d9e7-43cc-88d1-f0a600b1b667",
+		"name": "shipsmart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Adiciona um novo endereço",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cep\": \"09941070\",\n    \"estado\": \"SP\",\n    \"cidade\": \"Diadema\",\n    \"bairro\": \"Taboão\",\n    \"endereco\": \"Rua França\",\n    \"numero\": \"347\",\n    \"nome_contato\": \"Ricardo\",\n    \"email_contato\": \"ricardo.tecnology@gmail.com\",\n    \"telefone_contato\": \"11992494597\",\n    \"active\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACKEND}}/api/mongo/address",
+					"host": [
+						"{{BACKEND}}"
+					],
+					"path": [
+						"api",
+						"mongo",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca um endereço pelo seu ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BACKEND}}/api/mongo/address/1",
+					"host": [
+						"{{BACKEND}}"
+					],
+					"path": [
+						"api",
+						"mongo",
+						"address",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edita um endereço",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cep\": \"09941071\",\n    \"estado\": \"RJ\",\n    \"cidade\": \"DiademaSS\",\n    \"bairro\": \"TaboãoS\",\n    \"endereco\": \"Rua FrançSa\",\n    \"numero\": \"347655\",\n    \"nome_contato\": \"Ricardo\",\n    \"email_contato\": \"ricardo.tecnology@gmail.com\",\n    \"telefone_contato\": \"11992494597\",\n    \"active\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BACKEND}}/api/mongo/address/1",
+					"host": [
+						"{{BACKEND}}"
+					],
+					"path": [
+						"api",
+						"mongo",
+						"address",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desativa / ativa um endereço",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BACKEND}}/api/mongo/address/2",
+					"host": [
+						"{{BACKEND}}"
+					],
+					"path": [
+						"api",
+						"mongo",
+						"address",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listagem dos estados",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BACKEND}}/api/states",
+					"host": [
+						"{{BACKEND}}"
+					],
+					"path": [
+						"api",
+						"states"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listagem dos endereços ativos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "*/*",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BACKEND}}/api/mongo/address",
+					"host": [
+						"{{BACKEND}}"
+					],
+					"path": [
+						"api",
+						"mongo",
+						"address"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
