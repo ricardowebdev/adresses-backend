@@ -24,7 +24,7 @@ class CreateAdressesTable extends Migration
             $table->string('nome_contato', 50);
             $table->string('email_contato', 100);
             $table->string('telefone_contato', 15);
-            $table->boolean('active');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

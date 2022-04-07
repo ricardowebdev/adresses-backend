@@ -28,17 +28,17 @@ class AdressController extends Controller
     public function update($id, StoreAdressRequest $request, AdressesService $service)
     {
         $adress = $service->update($id, $request);
-        $status = $adress ? 200 : 404;
-        $response = $adress ? $adress : 'Adress not found';
+        $status = isset($adress->id) ? 200 : 404;
+        $response = isset($adress->id) ? $adress : 'Adress not found';
 
         return response($response, $status);
     }
 
     public function delete($id, AdressesService $service)
     {
-        $adress = $service->delete($id);
-        $status = $adress ? 200 : 404;
-        $response = $adress ? $adress : 'Adress not found';
+        $result = $service->delete($id);
+        $status = $result ? 200 : 404;
+        $response = $result ? 'Adress removed successfully' : 'Adress not found';
 
         return response($response, $status);
     }
@@ -46,8 +46,8 @@ class AdressController extends Controller
     public function get($id, AdressesService $service)
     {
         $adress = $service->get($id);
-        $status = $adress ? 200 : 404;
-        $response = $adress ? $adress : 'Adress not found';
+        $status = count($adress) ? 200 : 404;
+        $response = count($adress) ? $adress : 'Adress not found';
 
         return response($response, $status);
     }

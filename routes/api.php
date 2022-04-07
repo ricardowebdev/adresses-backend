@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdressController;
-use App\Http\Controllers\StatesControllers;
+use App\Http\Controllers\StatesController;
 
 
 /*
@@ -21,11 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/states', [StatesControllers::class, 'index']);
-Route::get('/adress', [AdressController::class, 'index']);
-Route::post('/adress', [AdressController::class, 'add']);
-Route::put('/adress/{id}', [AdressController::class, 'update']);
-Route::delete('/adress/{id}', [AdressController::class, 'delete']);
-Route::get('/adress/{id}', [AdressController::class, 'get']);
+Route::get('/states', [StatesController::class, 'index']);
+Route::get('/address', [AdressController::class, 'index']);
+Route::post('/address', [AdressController::class, 'add']);
+Route::put('/address/{id}', [AdressController::class, 'update']);
+Route::delete('/address/{id}', [AdressController::class, 'delete']);
+Route::get('/address/{id}', [AdressController::class, 'get']);
 
 

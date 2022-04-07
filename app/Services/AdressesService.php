@@ -9,22 +9,24 @@ class AdressesService
 {
     public function list()
     {
-        $adresses = Adresses::get()->where('active', 1);
+        $adresses = Adresses::get()
+            ->where('active', 1);
+            
         return $adresses;
     }
 
     public function add($data)
     {
         $adress = Adresses::create([
-            'cep' => $data->cep,
-            'estado' => $data->estado,
-            'cidade' => $data->cidade,
-            'bairro' => $data->bairro,
-            'endereco' => $data->endereco,
-            'numero' => $data->numero,
-            'nome_contato' => $data->nomeContato,
-            'email_contato' => $data->emailContato,
-            'telefone_contato' => $data->telefoneContato,
+            'cep'              => $data->cep,
+            'estado'           => $data->estado,
+            'cidade'           => $data->cidade,
+            'bairro'           => $data->bairro,
+            'endereco'         => $data->endereco,
+            'numero'           => $data->numero,
+            'nome_contato'     => $data->nome_contato,
+            'email_contato'    => $data->email_contato,
+            'telefone_contato' => $data->telefone_contato,
             'active' => 1
         ]);
 
@@ -43,9 +45,9 @@ class AdressesService
                 'bairro' => $data->bairro,
                 'endereco' => $data->endereco,
                 'numero' => $data->numero,
-                'nome_contato' => $data->nomeContato,
-                'email_contato' => $data->emailContato,
-                'telefone_contato' => $data->telefoneContato,
+                'nome_contato' => $data->nome_contato,
+                'email_contato' => $data->email_contato,
+                'telefone_contato' => $data->telefone_contato,
                 'active' => isset($data->active) ? $data->active : 0
             ]);
         }
@@ -59,9 +61,8 @@ class AdressesService
 
         $adress = Adresses::find($id);
         if ($adress) {
-            $result = $adress->update([
-                'active' => 0
-            ]);
+            $adress->active = !$adress->active;
+            $result = $adress->save();            
         }
 
         return $result;
@@ -72,6 +73,7 @@ class AdressesService
         $adress = Adresses::where('id', $id)
             ->where('active', 1)
             ->get();
+            
 
         return $adress;
     }
