@@ -1,0 +1,36 @@
+name: Deploy Adresses Backend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar dependências
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openssh-client git
+
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_B64 }}" | base64 -d > ~/.ssh/server_key.pem
+          chmod 600 ~/.ssh/server_key.pem
+          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy via SSH
+        timeout-minutes: 30
+        run: |
+          ssh -T -i ~/.ssh/server_key.pem ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd /caminho/do/projeto || exit 1            
+            git pull
+            docker compose down
+            docker compose up -d
+            docker compose exec -T php composer install --no-dev --optimize-autoloader
+          EOF
