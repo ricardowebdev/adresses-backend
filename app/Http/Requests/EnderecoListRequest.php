@@ -29,7 +29,7 @@ class EnderecoListRequest extends FormRequest
     {
         return [
             'cep'        => 'nullable|max:10',
-            'uf'         => 'nullable|max:30|min:5',
+            'uf'         => 'nullable|max:30|min:2',
             'cidade'     => "nullable|max:50",
             'bairro'     => "nullable|max:50",
             'logradouro' => 'nullable|max:100',
@@ -44,8 +44,8 @@ class EnderecoListRequest extends FormRequest
     {
         return [
             'cep.max'        => trans('validation.max', ['attribute' => 'cep', 'max' => '150']),
-            'uf.max'         => trans('validation.max', ['attribute' => 'uf', 'max' => '150']),
-            'uf.min'         => trans('validation.min', ['attribute' => 'uf', 'min' => '5']),
+            'uf.max'         => trans('validation.max', ['attribute' => 'uf', 'max' => '10']),
+            'uf.min'         => trans('validation.min', ['attribute' => 'uf', 'min' => '2']),
             'cidade.max'     => trans('validation.max', ['attribute' => 'cidade', 'max' => '50']),
             'bairro.max'     => trans('validation.max', ['attribute' => 'bairro', 'max' => '50']),
             'logradouro.max' => trans('validation.max', ['attribute' => 'logradouro', 'max' => '100']),

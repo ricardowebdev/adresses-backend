@@ -1,13 +1,14 @@
-name: Deploy Adresses Backend
+name: Deploy Ilumin Back
 
 on:
   push:
     branches:
       - main
 
-jobs:
+jobs: 
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
@@ -18,17 +19,18 @@ jobs:
           sudo apt-get install -y openssh-client git
 
       - name: Configurar SSH
+        env:
+          SSH_KEY_B64: ${{ secrets.SERVER_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY_B64 }}" | base64 -d > ~/.ssh/server_key.pem
+          echo "$SSH_KEY_B64" | base64 -d > ~/.ssh/server_key.pem
           chmod 600 ~/.ssh/server_key.pem
-          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy via SSH
-        timeout-minutes: 30
         run: |
-          ssh -T -i ~/.ssh/server_key.pem ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
-            cd /caminho/do/projeto || exit 1            
+          ssh -i ~/.ssh/server_key.pem ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd ${{ secrets.SERVER_PATH }} || exit 1            
             git pull
             docker compose down
             docker compose up -d

@@ -29,7 +29,7 @@ class EnderecoRequest extends FormRequest
     {
         return [
             'cep'        => 'required|max:10',
-            'uf'         => 'required|max:30|min:5',
+            'uf'         => 'required|max:30|min:2',
             'cidade'     => "required|max:50",
             'bairro'     => "nullable|max:50",
             'logradouro' => 'required|max:100',

@@ -37,6 +37,10 @@ class EnderecoRepository extends BaseRepository implements EnderecoRepositoryInt
             $query->where('e.logradouro', 'LIKE',  '%'.$filtros['logradouro'].'%');
         if (!empty($filtros['cep']))
             $query->where('e.cep', '=',  $filtros['cep']);
+        if (!empty($filtros['uf']))
+            $query->where('e.uf', '=',  $filtros['uf']);
+        if (!empty($filtros['cidade']))
+            $query->where('e.cidade', '=',  $filtros['cidade']);        
 
         return $query->orderBy('e.logradouro', 'asc')->get();
     }

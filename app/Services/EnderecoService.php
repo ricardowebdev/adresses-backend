@@ -46,7 +46,10 @@ class EnderecoService
             $data = $this->_repository->exibeEndereco($dados['cep'], $dados['numero']);
 
             if (!empty($data->id))
-                throw new WarningException(trans('validation.key_id_already_exists'), Response::HTTP_NOT_FOUND);
+                throw new WarningException(trans('validation.key_id_already_exists'), Response::HTTP_BAD_REQUEST);
+
+            $dados['logradouro'] = strtolower($dados['logradouro']);
+            $dados['nome'] = strtolower($dados['nome']);
 
             $data = $this->_repository->create($dados);
             return self::answer(self::$ANSWER_SUCCESS, trans('forms.insert.success'), Response::HTTP_CREATED, ['data' => $data]);

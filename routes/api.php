@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('enderecos', \App\Http\Controllers\EnderecoController::class)->only(['index', 'store', 'update', 'destroy', 'show'])->parameters(['enderecos' => 'endereco']);
+Route::post('enderecos/excel', [\App\Http\Controllers\EnderecoController::class, 'excel']);
 Route::apiResource('logs', \App\Http\Controllers\LogController::class)->only(['index', 'show'])->parameters(['logs' => 'log']);
 
