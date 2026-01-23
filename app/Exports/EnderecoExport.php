@@ -4,17 +4,18 @@ namespace App\Exports;
 
 use App\Repositories\EnderecoRepository;
 use Illuminate\Support\Facades\App;
-use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Collection;
 
-class EnderecoExport implements FromQuery, WithHeadings
+class EnderecoExport implements FromCollection, WithHeadings
 {
     use Exportable;
 
     protected $filters;
 
-    public function __construct(array $filters)
+    public function __construct(array $filters = [])
     {
         $this->filters = $filters;
     }
@@ -37,9 +38,9 @@ class EnderecoExport implements FromQuery, WithHeadings
         ];
     }
 
-    public function query()
+    public function collection(): Collection
     {
         $repository = App::make(EnderecoRepository::class);
-        return $repository->comRemovidos($this->filters); 
+        return $repository->excel($this->filters); 
     }
 }

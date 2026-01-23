@@ -93,5 +93,34 @@ class EnderecoRepository extends BaseRepository implements EnderecoRepositoryInt
         
         return $query->get()->first();
     }
+
+    public function excel($filtros = [])
+    {
+        $query =  DB::table($this->_model->getTable() . ' as e')
+            ->select([
+                'e.id',
+                'e.cep as Cep',
+                'e.uf as UF',
+                'e.cidade as Cidade',
+                'e.bairro as Bairro',
+                'e.logradouro as Logradouro',
+                'e.numero as Numero',
+                'e.nome as Nome',
+                'e.telefone as Telefone',
+                'e.email as E-mail',
+                'e.created_at as Registrado_em',
+                'e.deleted_at as Removido_em'
+            ]);
+
+        if (!empty($filtros['nome']))
+            $query->where('e.nome', 'LIKE',  '%'.$filtros['nome'].'%');
+        if (!empty($filtros['logradouro']))
+            $query->where('e.logradouro', 'LIKE',  '%'.$filtros['logradouro'].'%');
+        if (!empty($filtros['cep']))
+            $query->where('e.cep', '=',  $filtros['cep']);
+
+        return $query->orderBy('e.logradouro', 'asc')->get();            
+
+    }
     
 }
